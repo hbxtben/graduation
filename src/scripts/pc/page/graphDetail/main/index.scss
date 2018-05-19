@@ -1,0 +1,70 @@
+.m-detail {
+    width: 100%;
+    margin: 45px 0;
+    overflow: hidden;
+
+    .m-wrap-item {
+        width: 48%;
+        box-shadow: 0 0 10px rgba(0,0,0,.1);
+        margin: 1%;
+        padding: 1%;
+    }
+
+    .m-config {
+        float: left;
+
+        .m-steps-content {
+            margin-top: 16px;
+            border: 1px dashed #e9e9e9;
+            border-radius: 6px;
+            background-color: #fafafa;
+            min-height: 200px;
+            text-align: center;
+            padding: 10px;
+        }
+    }
+
+    .m-steps {
+        position: relative;
+
+        .u-steps {
+            width: 75%;
+            margin: auto;
+        }
+
+        .u-left, .u-right {
+            position: absolute;
+            font-size: 20px;
+            top: 0;
+            cursor: pointer;
+        }
+
+        .u-left {
+            left: 0;
+        }
+
+        .u-right {
+            right: 0;
+        }
+        
+        .active {
+            color: #1890ff;
+        }
+    }
+
+    .m-graph {
+        float: right;
+
+        .graph-wrap {
+            width: 100%;
+            height: 600px;
+        }
+        
+        .graph-text-tip {
+            display: block;
+            font-size: 22px;
+            line-height: 600px;
+            text-align: center;
+        }
+    }
+}

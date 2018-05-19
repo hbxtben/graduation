@@ -1,0 +1,39 @@
+.m-list {
+    width: 1190px;
+    margin: 50px auto;    
+
+    .m-list-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 1360px;
+        margin-bottom: 30px;
+    }
+
+    .m-graph-card {
+        cursor: pointer;
+        border-radius: 3px;
+        box-shadow: 0 0 10px rgba(0,0,0,.1);
+        transition: all .5s ease;
+    }
+
+    .m-graph-card:hover {
+        z-index: 1000;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        transform: translate3d(0,-4px,0);
+    }
+
+    .m-paginate {
+        display: flex;
+        justify-content: center;
+    }
+
+    .m-error-text{
+        font-size: 32px;
+        color: #666;
+        text-align: center;
+        margin: 300px;
+    }
+}
