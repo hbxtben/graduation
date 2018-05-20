@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import './index.scss';
 
-const pageSize = 9; //一页展示的数目
+const pageSize = 3; //一页展示的数目
 
 @withRouter
 @observer(['graphStore', 'userStore', 'navStore'])
@@ -34,7 +34,9 @@ class GraphList extends Component {
 
     //分页的点击处理
     handlePageChange = (pageNumber) => {
-        const { changePage, getList } = this.props.graphStore;
+        const { graphStore, userStore } = this.props;
+        const { changePage, getList } = graphStore;
+        const { username } = userStore;
 
         changePage(pageNumber);
         getList({
