@@ -65,7 +65,7 @@ class GraphDetail extends Component {
     onHandleSave = () => {
         const { history, detailStore, userStore, navStore } = this.props;
         const { detailData, options, graphType, saveGraphData } = detailStore;
-        const { loginTag } = userStore;
+        const { loginTag, username } = userStore;
         const { query } = history.location;
 
         if(!loginTag) {
@@ -97,6 +97,7 @@ class GraphDetail extends Component {
                 graphType: toJS(graphType),
                 data,
                 img: "http://localhost:9000/test.png",
+                username,
                 _id
             })
             .then(res => {

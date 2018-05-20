@@ -2,23 +2,33 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import GraphCard from '../components/graphCard';
 import { Pagination } from 'antd';
+import { withRouter } from 'react-router-dom';
 
 import './index.scss';
 
 const pageSize = 2; //一页展示的数目
 
-@observer(['graphStore'])
+@withRouter
+@observer(['graphStore', 'userStore', 'navStore'])
 class GraphList extends Component {
     constructor(props) {
         super(props)
     }
 
     componentDidMount() {
-        const { getList, curPage } = this.props.graphStore;
+        const { history, graphStore, userStore, navStore } = this.props;
+        const { getList, curPage } = graphStore;
+        const { username, loginTag } = userStore; 
+
+        if(!loginTag) {
+            navStore.changeNav('/');
+            history.push('/');
+        }
         
         getList({
             pageNum: curPage,
-            pageSize
+            pageSize,
+            username
         }); //获取数据
     }
 
@@ -29,7 +39,8 @@ class GraphList extends Component {
         changePage(pageNumber);
         getList({
             pageNum: pageNumber,
-            pageSize
+            pageSize,
+            username
         });
     }
 
