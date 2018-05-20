@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import './index.scss';
 
-const pageSize = 2; //一页展示的数目
+const pageSize = 9; //一页展示的数目
 
 @withRouter
 @observer(['graphStore', 'userStore', 'navStore'])
