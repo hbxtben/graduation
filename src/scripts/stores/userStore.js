@@ -10,84 +10,73 @@ class UserStore {
     //登陆
     @action doLogin = (data) => {
         const loginRequest = userRequest.login;
-        loginRequest(data)
+        
+        return loginRequest(data)
         .then(res => {
             const resData = res.data;
-            if(resData && resData.status === 0) {
+            if(resData && resData.ret) {
                 const { username, nickname } = resData.data;
 
                 this.username = username,
                 this.nickname = nickname,
                 this.loginTag = true; 
                 this.loginTip = '';  
+                
+                //设置lcoalstorage
+                localStorage.setItem("username", username);
+                localStorage.setItem("nickname", nickname);
             } else {
                 throw Error("server error");
             }
-        })
-        .catch(err => {
-            this.loginTip = "账号或者密码错误";
-        })
+        });
     }
 
     //登出
     @action doLogout = () => {
         const logoutRequest = userRequest.logout;
 
-        logoutRequest()
-        .then(res => {
-            const resData = res.data;
-            if(resData && resData.status === 0) {
-                this.loginTag = false;
-                this.loginTip = '';                       
-            } else {
-                throw Error("server error");
-            }
-        })
-        .catch(err => {
-            this.loginTip = "服务器错误，请稍后再试";
-        })
+        //清楚localstorage中的用户信息
+        localStorage.removeItem("username");
+        localStorage.removeItem("nickname");
+        this.loginTag = false;
+        this.loginTip = '';   
     }
 
     //注册
     @action doSign = (data) => {
         const signinRequest = userRequest.signin;
 
-        signinRequest(data)
-        .then(res => {
-            const resData = res.data;
-            if(resData && resData.status === 0) {
-                const { username, nickname } = resData.data;
+        return signinRequest(data)
+                .then(res => {
+                    const resData = res.data;
+                    if(resData && resData.ret) {
+                        const { username, nickname } = resData.data;
 
-                this.username = username,
-                this.nickname = nickname,
-                this.loginTag = true; 
-                this.loginTip = '';                      
-            } else {
-                throw Error("server error");
-            }
-        })
-        .catch(err => {
-            this.loginTip = "服务器错误，请稍后再试";
-        })
+                        this.username = username,
+                        this.nickname = nickname,
+                        this.loginTag = true; 
+                        this.loginTip = ''; 
+                        
+                        //设置localstorage保存用户信息
+                        localStorage.setItem("username", username);
+                        localStorage.setItem("nickname", nickname);
+                    } else {
+                        throw Error("server error");
+                    }
+                })
     }
 
     //判断是否登陆
     @action isLogin = () => {
-        const isLoginRequest = userRequest.isLogin;
+        const username = localStorage.getItem("username");
+        const nickname = localStorage.getItem("nickname");
 
-        isLoginRequest()
-        .then(res => {
-            const resData = res.data;
-            if(resData && resData.status === 0) {
-                const { username, nickname } = resData.data;
-
-                this.username = username,
-                this.nickname = nickname,
-                this.loginTag = true;               
-            }
-        })
-        .catch(err => {
-        })
+        if(username && nickname) {
+            this.username = username;
+            this.nickname = nickname;
+            this.loginTag = true;
+            this.loginTip = '';
+        }
     }
 }
 

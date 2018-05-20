@@ -26,15 +26,16 @@ class GraphDetail extends Component {
         const { history, detailStore } = this.props;
 
         if(history.location.query) {
-            const { id } = history.location.query;
+            const { _id } = history.location.query;
             const { setData, chooseGraphType, changeGraphOptions } = detailStore;
 
-            detailStore.setDetailData({ id })
+            detailStore.setDetailData({ _id })
             .then((res) => {
-                if(res && res.data) {
-                    setData(JSON.stringify(res.data));
-                    chooseGraphType(res.graphType);
-                    changeGraphOptions(res.options);
+                if(res && res.ret) {
+                    const data = res.data[0];
+                    setData(data.data);
+                    chooseGraphType(data.graphType);
+                    changeGraphOptions(JSON.parse(data.options));
 
                     graphDraw({
                         ...detailStore,
@@ -71,11 +72,11 @@ class GraphDetail extends Component {
             message.error("保存前请先登陆");
             return;
         }
-
+        
         if(detailData !== '[]') {
             let data = null,
                 img = null,
-                id = query && query.id || null;
+                _id = query && query._id || null;
 
             try {
                 data = JSON.parse(toJS(detailData)); //数据
@@ -95,16 +96,18 @@ class GraphDetail extends Component {
                 options: toJS(options),
                 graphType: toJS(graphType),
                 data,
-                img,
-                id
+                img: "http://localhost:9000/test.png",
+                _id
             })
             .then(res => {
-                if(res && res.result === 'success') {
-                    message.success("保存成功", 1200);
+                if(res && res.ret) {
+                    message.success("保存成功", 2);
                     setTimeout(() => {
                         navStore.changeNav('/graphList');
                         history.push('/graphList');
                     }, 1200);
+                } else {
+                    throw Error("wrong answer");
                 }
             })
             .catch((e) => {

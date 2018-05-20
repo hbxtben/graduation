@@ -81,9 +81,9 @@ class OptionPick extends Component {
                         )}
                     </FormItem>
                     <FormItem>
-                        <Button onClick={this.props.onHandleSave}>保存</Button>
+                        <Button htmlType="submit" onClick={() => {setTimeout(this.props.onHandleSave, 200)}}>保存</Button>
                         <span style={{marginRight: '8px'}}></span>
-                        <Button type="primary" htmlType="submit">运行</Button>
+                        <Button type="primary" >运行</Button>
                     </FormItem>
                 </Form>
             </div>

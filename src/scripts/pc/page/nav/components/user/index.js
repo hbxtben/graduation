@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Icon, Avatar } from 'antd';
+import { Icon, Avatar, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import UserCreateForm from '../userForm';
 
@@ -69,7 +69,10 @@ class User extends Component {
     //登陆执行
     login = (values) => {
         const { doLogin } = this.props.userStore;
-        doLogin(values);
+        
+        doLogin(values).catch(err => {
+            message.error("账号或密码错误");
+        })
     }
 
     //退出
@@ -85,7 +88,10 @@ class User extends Component {
     //注册执行
     signin = (values) => {
         const { doSign } = this.props.userStore;
-        doSign(values);      
+        
+        doSign(values).catch(err => {
+            message.error("账号已经被使用了");
+        })    
     }
 
     //从当前框跳转到其他框

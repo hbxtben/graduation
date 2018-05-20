@@ -2,7 +2,7 @@ import axios from 'axios';
 import API from './api';
 import config from './config';
 
-axios.defaults.baseURL = config.mockS;  //配置默认路径前缀
+axios.defaults.baseURL = config.localNS;  //配置默认路径前缀
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'; //发送格式
 
@@ -14,13 +14,13 @@ export const userRequest = {
         return axios.post(userApi.login, {...data});
     },
             
-    logout: () => {
-        return axios.get(userApi.logout);
-    },
+    // logout: () => {
+    //     return axios.get(userApi.logout);
+    // },
 
-    isLogin: () => {
-        return axios.get(userApi.isLogin);
-    },
+    // isLogin: () => {
+    //     return axios.get(userApi.isLogin);
+    // },
 
     signin: (data) => {
         return axios.post(userApi.signin, {...data})

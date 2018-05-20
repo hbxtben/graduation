@@ -19,7 +19,7 @@ class GraphStore {
         getGraphList(data)
         .then(res => {
             const resData = res.data;
-            if(resData && resData.status === 0) {
+            if(resData && resData.ret) {
                 const { dataSize, list } = resData.data;
 
                 this.list = list;

@@ -5,7 +5,7 @@ import { Pagination } from 'antd';
 
 import './index.scss';
 
-const pageSize = 9; //一页展示的数目
+const pageSize = 2; //一页展示的数目
 
 @observer(['graphStore'])
 class GraphList extends Component {
@@ -44,12 +44,13 @@ class GraphList extends Component {
                 </p>
             )    
         } else {
+            const height = 460 * Math.ceil(list.length / 3);
             content = (
                 <div>
-                    <div className='m-list-wrap'>
+                    <div className='m-list-wrap' style={{height: `${height}px`}}>
                         {list.map((item) => {
                             return (
-                                <GraphCard extraClass='m-graph-card' {...item} key={item.id}/>                        
+                                <GraphCard extraClass='m-graph-card' {...item} key={item._id}/>                        
                             )
                         })}
                     </div>
@@ -57,6 +58,7 @@ class GraphList extends Component {
                         <Pagination 
                             current={curPage} 
                             total={dataSize}
+                            defaultPageSize={pageSize}
                             onChange={this.handlePageChange} 
                             hideOnSinglePage={true}
                         />

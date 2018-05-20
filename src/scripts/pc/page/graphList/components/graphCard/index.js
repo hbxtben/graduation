@@ -18,11 +18,11 @@ class GraphCard extends Component {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
         
-        const { id, history, navStore } = this.props;
+        const { _id, history, navStore } = this.props;
         navStore.changeNav('/graphDetail');
         history.push({
             pathname: '/graphDetail',
-            query: { id } 
+            query: { _id } 
         })
     }
 
@@ -30,13 +30,13 @@ class GraphCard extends Component {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
 
-        const { id, history, graphStore } = this.props;
+        const { _id, history, graphStore } = this.props;
         
         graphStore.delList({
-            id
+            _id
         })
         .then((res) => {
-            if(res.result === 'success') {
+            if(res.ret) {
                 message.success("删除成功", 2);
                 setTimeout(() => {
                     window.location.reload();
@@ -51,13 +51,15 @@ class GraphCard extends Component {
     }
 
     render() {
-        const { graphImg, title, intro, extraClass } = this.props;
+        const { img, options, extraClass } = this.props;
+        const optionsObj = JSON.parse(options);
+        const { text, subtext } = optionsObj.title;
 
         return (
             <div className={extraClass} onClick={this.openDetail}>
                 <Card
                     style={{ width: 300 }}
-                    cover={<img alt="example" src={graphImg} />}
+                    cover={<img alt="example" src={img} />}
                     actions={[
                         (<Tooltip placement="topLeft" title="编辑" arrowPointAtCenter>
                             <div style={{width:'60px'}} onClick={this.openDetail}>
@@ -72,8 +74,8 @@ class GraphCard extends Component {
                     ]}
                 >
                     <Meta
-                        title={title}
-                        description={intro}
+                        title={text}
+                        description={subtext}
                     />
                 </Card>
             </div>
