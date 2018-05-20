@@ -22,6 +22,14 @@ const typeList = [{
     name: '折线图',
     img: api.typeImg.line,
     type: 'line'
+}, {
+    name: '散点图',
+    img: api.typeImg.scatter,
+    type: 'scatter'
+}, {
+    name: '漏斗图',
+    img: api.typeImg.funnel,
+    type: 'funnel'
 }]
 
 @observer(['detailStore'])

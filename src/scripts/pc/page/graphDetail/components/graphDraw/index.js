@@ -6,6 +6,8 @@ import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/bar';
 import 'echarts/lib/chart/line';
 import 'echarts/lib/chart/pie';
+import 'echarts/lib/chart/scatter';
+import 'echarts/lib/chart/funnel';
 
 // 引入组件
 import 'echarts/lib/component/tooltip';
@@ -66,7 +68,9 @@ export const getGraphImg = () => {
         return "";
     } else {
         return myEchart.getDataURL({
-            type: 'jpeg'
+            type: 'jpeg',
+            backgroundColor: '#fff',
+            pixelRatio: 0.8
         });
     }
 }

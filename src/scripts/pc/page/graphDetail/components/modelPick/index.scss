@@ -3,7 +3,11 @@
     height: 540px;
     display: flex;
     justify-content: space-around;
-    align-content: center;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.m-model-pick img {
+    width: 168px;
+    height: 152px;
 }

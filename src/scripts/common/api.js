@@ -45,7 +45,11 @@ const API = {
 
         bar: '/typeImg/bar.png',
 
-        line: '/typeImg/line.png'
+        line: '/typeImg/line.png',
+
+        scatter: '/typeImg/scatter.png',
+
+        funnel: '/typeImg/funnel.png',        
     }
 }
 

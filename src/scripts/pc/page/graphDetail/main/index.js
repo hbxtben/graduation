@@ -96,7 +96,7 @@ class GraphDetail extends Component {
                 options: toJS(options),
                 graphType: toJS(graphType),
                 data,
-                img: "http://localhost:9000/test.png",
+                img,
                 username,
                 _id
             })
