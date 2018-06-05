@@ -15,6 +15,10 @@ const options = {
     legend: {
         bottom: 0
     },
+    textStyle: {
+        color: "#000000"
+    },
+    backgroundColor: '#ffffff',
     xAxis: {type: 'category'},  //x轴展示分类
     yAxis: {}
 }

@@ -34,12 +34,18 @@ class OptionPick extends Component {
             if (err) {
                 return;
             }
-    
+            const { text, subtext, backgroundColor, textColor } = values;
+
             changeGraphOptions({
                 title: {
                     x: 'center',
-                    ...values
-                }
+                    text,
+                    subtext
+                },
+                textStyle: {
+                    color: textColor
+                },
+                backgroundColor
             })
             onHandleRun();
         });  
@@ -54,7 +60,7 @@ class OptionPick extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
-                        label="text"
+                        label="标题"
                     >
                         {getFieldDecorator('text', {
                             rules: [{
@@ -69,7 +75,7 @@ class OptionPick extends Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="subtext"
+                        label="副标题"
                     >
                         {getFieldDecorator('subtext', {
                             rules: [{
@@ -78,6 +84,32 @@ class OptionPick extends Component {
                             initialValue: options.title.subtext
                         })(
                             <TextArea/>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="背景色"
+                    >
+                        {getFieldDecorator('backgroundColor', {
+                            rules: [{
+                                max: 7, message: '请输入十六进制颜色',
+                            }],
+                            initialValue: options.backgroundColor
+                        })(
+                            <Input/>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="坐标颜色"
+                    >
+                        {getFieldDecorator('textColor', {
+                            rules: [{
+                                max: 7, message: '请输入十六进制颜色',
+                            }],
+                            initialValue: options.textStyle.color
+                        })(
+                            <Input/>
                         )}
                     </FormItem>
                     <FormItem>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
+import { Button, Icon, message } from 'antd';
 import { observer } from 'mobx-react';
 
 import './index.scss';
@@ -18,6 +18,22 @@ class DataSet extends Component {
         showExample(type || 'single');
     }
 
+    onFileAdd = (eve) => {
+        const fileObj = eve.target;
+        const file = fileObj.files[0];
+
+        if(!file || file.type != 'text/plain') {
+            message.error("文件格式错误");
+        } else {
+            let reader = new FileReader();//新建一个FileReader
+            reader.readAsText(file, "UTF-8");//读取文件 
+            reader.onload = evt => { //读取完文件之后会回来这里
+                let fileString = evt.target.result; // 读取文件内容
+                this.props.detailStore.setData(fileString);
+            }
+        }
+    }
+
     render() {
         const { onHandleRun } = this.props;
         const { detailData, setData } = this.props.detailStore; 
@@ -30,6 +46,11 @@ class DataSet extends Component {
                     value={detailData}
                     onChange={() => {setData(this.textarea.value)}}>
                 </textarea>
+                <div className='u-data-file'>
+                    <Icon type="file" />
+                    <input type='file' onChange={this.onFileAdd} />
+                    <p>文件上传</p>
+                </div>
                 <div className='m-control'>
                     <div className='u-example'>
                         <b>示例数据</b>

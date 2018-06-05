@@ -37,6 +37,7 @@ class DetailStore {
     //修改配置
     @action changeGraphOptions = options => {
         this.options = Object.assign({}, this.options, options);
+        console.log("change options~~:", options);
     }
 
     @action setDetailData = data => {

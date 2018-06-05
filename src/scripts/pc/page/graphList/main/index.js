@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import './index.scss';
 
-const pageSize = 9; //一页展示的数目
+const pageSize = 6; //一页展示的数目
 
 @withRouter
 @observer(['graphStore', 'userStore', 'navStore'])
@@ -57,7 +57,7 @@ class GraphList extends Component {
                 </p>
             )    
         } else {
-            const height = 460 * Math.ceil(list.length / 3);
+            const height = 460 * Math.ceil(list.length / 3) + 50;
             content = (
                 <div>
                     <div className='m-list-wrap' style={{height: `${height}px`}}>
